@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
 
     /*
@@ -31,8 +31,6 @@ Laadige oma projekt GitHub Pages'i ja Moodle'sse Ülesande 6 kaudu esitage link 
      */
 
 
-
-
     //clock
 
 
@@ -45,19 +43,19 @@ põhjustab setInterval: meetodil kulub 1 sekund, et aega uuendada. Leidke viis �
 olete lisaülesandega hakkama saanud, muutke kella värv punaseks!
      */
 
-    document.addEventListener("DOMContentLoaded", function() {
-        
+    document.addEventListener("DOMContentLoaded", function () {
+
         let c = document.getElementById("clock");
-       
+
         //setTimeout(updateClock, 2000);
         setInterval(updateClock, 1000);
-        
+
         function updateClock() {
 
             let dateold = new Date();
 
-            let date = new Date(dateold.getFullYear(), dateold.getMonth(),dateold.getDay(), dateold.getHours(),
-                dateold.getMinutes(),dateold.getSeconds() + 1);
+            let date = new Date(dateold.getFullYear(), dateold.getMonth(), dateold.getDay(), dateold.getHours(),
+                dateold.getMinutes(), dateold.getSeconds() + 1);
             let h = date.getHours();
             let m = date.getMinutes();
             let s = date.getSeconds();
@@ -76,7 +74,7 @@ olete lisaülesandega hakkama saanud, muutke kella värv punaseks!
                 s = "0" + s;
             }
 
-            if (h >=12) {
+            if (h >= 12) {
                 noon = "PL";
             } else {
                 noon = "EL";
@@ -89,11 +87,11 @@ olete lisaülesandega hakkama saanud, muutke kella värv punaseks!
             }
 
             c.innerHTML = h2 + ":" + m + ":" + s + " " + noon;
-            
+
         };
-        
+
     });
-    
+
     // forms
 
     /*
@@ -106,35 +104,24 @@ ja kujundage see style.css failis (css-faili uue osa juurde lisage kommentaar si
 lisage vormile sisendi kontroll: tekstiväljad ei tohi olla tühjad, ei tohi sisaldada numbreid, üks raadionuppudest peab
 olema valitud (vastasel juhul visatakse ette alert aken) jne.;
      */
-    
+
     document.getElementById("form").addEventListener("submit", estimateDelivery);
-    
+
     let e = document.getElementById("delivery");
     e.innerHTML = "0,00 &euro;";
-    
+
     function estimateDelivery(event) {
         event.preventDefault();
-        
         let linn = document.getElementById("linn");
-        
         if (linn.value === "") {
-            
             alert("Palun valige linn nimekirjast");
-            
             linn.focus();
-            
             return;
-            
-            
         } else {
-            
             e.innerHTML = "x,xx &euro;";
-            
-        }        
-        
+        }
         console.log("Tarne hind on arvutatud");
     }
-    
 })();
 
 // map
@@ -149,33 +136,56 @@ uurige API dokumentatsioon ja lisage kaardile infobox'id, mis ilmuvad markerile 
  */
 
 let mapAPIKey = "AqLLRE37SJGqIxXEYxezPUa6fF2oCzl3cvG4n05FtFIVBrotBYxchpMYYpwuxBak";
+let raivoAPIkey = "AmGxyuksfuaJAf4zuJoGdKVrkwYXlpladqesGAl1K31_cAP3DA_k8uXJzS0UAHWh"
 
 let map;
 
 function GetMap() {
-    
+
     "use strict";
 
+
+    let deltaPoint = new Microsoft.Maps.Location(
+        58.38526,
+        26.72584
+    );
+
+    let raivoPoint = new Microsoft.Maps.Location(
+        59.3658712,
+        24.9175993
+    );
+    let lat1 = deltaPoint.latitude;
+    let lat2 = raivoPoint.latitude;
+    let long1 = deltaPoint.longitude;
+    let long2 = raivoPoint.longitude;
+    let centerlat = (lat1 + lat2) / 2;
+    let centerlong = (long1 + long2) / 2;
+
     let centerPoint = new Microsoft.Maps.Location(
-            58.38104, 
-            26.71992
-        );
+        centerlat, centerlong
+    );
 
     map = new Microsoft.Maps.Map("#map", {
         credentials: mapAPIKey,
         center: centerPoint,
-        zoom: 14,
+        zoom: 7,
         mapTypeId: Microsoft.Maps.MapTypeId.road,
         disablePanning: true
     });
-    
-    let pushpin = new Microsoft.Maps.Pushpin(centerPoint, {
-            title: 'Tartu Ülikool',
-            //subTitle: 'Hea koht',
-            //text: 'UT'
-        });
+
+    let pushpin = new Microsoft.Maps.Pushpin(deltaPoint, {
+        title: 'Delta maja',
+
+    });
+
+
+    let pushpin2 = new Microsoft.Maps.Pushpin(raivoPoint, {
+        title: 'Minu kodu',
+
+    });
 
     map.entities.push(pushpin);
+    map.entities.push(pushpin2);
 
 }
 
