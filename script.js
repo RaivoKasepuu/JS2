@@ -105,24 +105,81 @@ lisage vormile sisendi kontroll: tekstiväljad ei tohi olla tühjad, ei tohi sis
 olema valitud (vastasel juhul visatakse ette alert aken) jne.;
      */
 
+    function priceCalculation() {
+
+        let linn = document.getElementById("linn").value;
+        let v1 = document.getElementById("v1");
+        let v2 = document.getElementById("v2");
+        let hind = document.getElementById("delivery");
+        let linnaSumma = 0;
+        if (linn === "tln") {
+            linnaSumma += 0;
+
+        } else if (linn === "trt") {
+            linnaSumma += 2.5;
+
+        } else if (linn === "nrv") {
+            linnaSumma += 2.5;
+
+        } else if (linn === "prn") {
+            linnaSumma += 3.0;
+
+        }
+
+        if (v1.checked == true) {
+            linnaSumma += 5.0;
+
+        } else {
+            linnaSumma += 0.0;
+        }
+
+        if (v2.checked == true) {
+            linnaSumma += 1.0;
+        } else {
+            linnaSumma += 0.0;
+        }
+
+        hind.innerText = linnaSumma + " €";
+        return;
+
+
+    }
+
+
+    document.getElementById("linn").addEventListener("change", priceCalculation);
+    document.getElementById("v1").addEventListener("change", priceCalculation);
+    document.getElementById("v2").addEventListener("change", priceCalculation);
+
     document.getElementById("form").addEventListener("submit", estimateDelivery);
 
     let e = document.getElementById("delivery");
     e.innerHTML = "0,00 &euro;";
 
     function estimateDelivery(event) {
+
         event.preventDefault();
+
         let linn = document.getElementById("linn");
         if (linn.value === "") {
             alert("Palun valige linn nimekirjast");
             linn.focus();
-            return;
-        } else {
-            e.innerHTML = "x,xx &euro;";
         }
+        let perenimi = document.getElementById("lname");
+        if (perenimi.value === "") {
+            alert("Palun sisestage perekonnanimi");
+
+        }
+        let eesnimi = document.getElementById("fname");
+        if (eesnimi.value === "") {
+            alert("Palun vsisestage eesnimi");
+
+        }
+
+
+
         console.log("Tarne hind on arvutatud");
     }
-})();
+}());
 
 // map
 
