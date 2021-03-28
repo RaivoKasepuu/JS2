@@ -175,12 +175,14 @@ function GetMap() {
 
     let pushpin = new Microsoft.Maps.Pushpin(deltaPoint, {
         title: 'Delta maja',
+        enableHoverStyle: true
 
     });
 
 
     let pushpin2 = new Microsoft.Maps.Pushpin(raivoPoint, {
         title: 'Minu kodu',
+        enableHoverStyle: true
 
     });
 
