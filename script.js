@@ -144,7 +144,6 @@ function GetMap() {
 
     "use strict";
 
-
     let deltaPoint = new Microsoft.Maps.Location(
         58.38526,
         26.72584
@@ -154,16 +153,11 @@ function GetMap() {
         59.3658712,
         24.9175993
     );
-    let lat1 = deltaPoint.latitude;
-    let lat2 = raivoPoint.latitude;
-    let long1 = deltaPoint.longitude;
-    let long2 = raivoPoint.longitude;
-    let centerlat = (lat1 + lat2) / 2;
-    let centerlong = (long1 + long2) / 2;
 
     let centerPoint = new Microsoft.Maps.Location(
-        centerlat, centerlong
+        (deltaPoint.latitude + raivoPoint.latitude) / 2, (deltaPoint.longitude + deltaPoint.longitude) / 2
     );
+
 
     map = new Microsoft.Maps.Map("#map", {
         credentials: mapAPIKey,
@@ -174,7 +168,7 @@ function GetMap() {
     });
 
     let pushpin = new Microsoft.Maps.Pushpin(deltaPoint, {
-        title: 'Delta maja',
+        title: "Delta maja",
         enableHoverStyle: true
 
     });
@@ -182,12 +176,27 @@ function GetMap() {
 
     let pushpin2 = new Microsoft.Maps.Pushpin(raivoPoint, {
         title: 'Minu kodu',
-        enableHoverStyle: true
+        enableHoverStyle: true,
+        onclick: showDetails(raivoPoint)
 
     });
 
     map.entities.push(pushpin);
     map.entities.push(pushpin2);
+
+    Microsoft.Maps.Events.addHandler(pushpin2, 'click', function (args) {
+        myInfobox.setOptions({
+            location: args.target.getLocation(),
+            title: args.target.metadata.title,
+            description: args.target.metadata.description,
+            visible: true
+        });
+    });
+
+    function showDetails(id) {
+        alert("Raivo kodu on siin: " + id);
+    }
+
 
 }
 
