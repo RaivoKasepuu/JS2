@@ -238,6 +238,9 @@ function GetMap() {
 
     });
 
+
+    var infobox = new Microsoft.Maps.Infobox(centerPoint, { title: 'Map Center', description: 'Kusagil Eestis' });
+    infobox.setMap(map);
     map.entities.push(pushpin);
     map.entities.push(pushpin2);
 
@@ -250,8 +253,9 @@ function GetMap() {
         });
     });
 
+
     function showDetails(id) {
-        alert("Raivo kodu on siin: " + id);
+       alert("Raivo kodu on siin: " + id);
     }
 
 
