@@ -35,6 +35,16 @@ Laadige oma projekt GitHub Pages'i ja Moodle'sse Ülesande 6 kaudu esitage link 
 
     //clock
 
+
+    /*
+
+    hetkel loodud kell on 24 tunni kell. Muutke see 12 tunni kellaks (https://et.wikipedia.org/wiki/Kellaaeg);
+
+    Lisaülesanne: võrreldes meie kella https://time.is/ kellaga näeme, et meie oma on tegelikult 1 sekund taga. Seda
+põhjustab setInterval: meetodil kulub 1 sekund, et aega uuendada. Leidke viis õige aja näitamiseks. Andmaks märku, et
+olete lisaülesandega hakkama saanud, muutke kella värv punaseks!
+     */
+
     document.addEventListener("DOMContentLoaded", function() {
         
         let c = document.getElementById("clock");
@@ -85,6 +95,17 @@ Laadige oma projekt GitHub Pages'i ja Moodle'sse Ülesande 6 kaudu esitage link 
     });
     
     // forms
+
+    /*
+lisage interaktiivsust Tarne hind nupule: nupul vajutamisel peaks kasutaja mugaval vormil teada saama, palju tal tuleb
+tarne eest maksta (valikute hinnad on koodis kommentaaridena kirjas);
+
+täiendage olemasolev vorm raadionuppudega (radiobutton), mille sisu valige ise (aga olgu ikkagi kuidagi seotud tarnega),
+ja kujundage see style.css failis (css-faili uue osa juurde lisage kommentaar siin on minu looming);
+
+lisage vormile sisendi kontroll: tekstiväljad ei tohi olla tühjad, ei tohi sisaldada numbreid, üks raadionuppudest peab
+olema valitud (vastasel juhul visatakse ette alert aken) jne.;
+     */
     
     document.getElementById("form").addEventListener("submit", estimateDelivery);
     
@@ -117,6 +138,15 @@ Laadige oma projekt GitHub Pages'i ja Moodle'sse Ülesande 6 kaudu esitage link 
 })();
 
 // map
+
+
+/*
+lisage kaardile mõni teine aadress (mis EI asu Tartus; oluline on kasutada turvalist protokolli ehk https://..), lisage
+sellele marker ja muutke kaardi keskpunkt ja suum nii, et mõlemad kohad oleksid kaardil vaikimisi nähtavad;
+
+uurige API dokumentatsioon ja lisage kaardile infobox'id, mis ilmuvad markerile vajutades.
+
+ */
 
 let mapAPIKey = "AqLLRE37SJGqIxXEYxezPUa6fF2oCzl3cvG4n05FtFIVBrotBYxchpMYYpwuxBak";
 
